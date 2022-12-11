@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3308
--- Généré le : jeu. 08 déc. 2022 à 14:52
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Host: localhost:3306
+-- Generation Time: Dec 11, 2022 at 02:38 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,26 +18,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `vgs`
+-- Database: `vgs`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chapitre`
+-- Table structure for table `chapitre`
 --
 
-DROP TABLE IF EXISTS `chapitre`;
-CREATE TABLE IF NOT EXISTS `chapitre` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `chapitre` (
+  `id` int NOT NULL,
   `projet` varchar(255) NOT NULL,
   `nb_chap` varchar(11) NOT NULL,
-  `data_date` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `data_date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `chapitre`
+-- Dumping data for table `chapitre`
 --
 
 INSERT INTO `chapitre` (`id`, `projet`, `nb_chap`, `data_date`) VALUES
@@ -50,43 +48,39 @@ INSERT INTO `chapitre` (`id`, `projet`, `nb_chap`, `data_date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentaire`
+-- Table structure for table `commentaire`
 --
 
-DROP TABLE IF EXISTS `commentaire`;
-CREATE TABLE IF NOT EXISTS `commentaire` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `commentaire` (
+  `id` int NOT NULL,
   `pseudo` varchar(250) NOT NULL,
   `commentaires` text NOT NULL,
   `projet` varchar(250) NOT NULL,
-  `date_data` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `date_data` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `mangas`
+-- Table structure for table `mangas`
 --
 
-DROP TABLE IF EXISTS `mangas`;
-CREATE TABLE IF NOT EXISTS `mangas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mangas` (
+  `id` int NOT NULL,
   `nom` text NOT NULL,
   `nom_alternatifs` text NOT NULL,
   `auteur` text NOT NULL,
   `artiste` text NOT NULL,
   `status` text NOT NULL,
-  `annee` int(11) NOT NULL,
+  `annee` int NOT NULL,
   `genre` text CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `description` text NOT NULL,
-  `nb_chap` int(11) NOT NULL,
-  `date_update` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+  `nb_chap` int NOT NULL,
+  `date_update` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `mangas`
+-- Dumping data for table `mangas`
 --
 
 INSERT INTO `mangas` (`id`, `nom`, `nom_alternatifs`, `auteur`, `artiste`, `status`, `annee`, `genre`, `description`, `nb_chap`, `date_update`) VALUES
@@ -123,22 +117,20 @@ INSERT INTO `mangas` (`id`, `nom`, `nom_alternatifs`, `auteur`, `artiste`, `stat
 -- --------------------------------------------------------
 
 --
--- Structure de la table `membres`
+-- Table structure for table `membres`
 --
 
-DROP TABLE IF EXISTS `membres`;
-CREATE TABLE IF NOT EXISTS `membres` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `membres` (
+  `id` int NOT NULL,
   `pseudo` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
   `motdepasse` text NOT NULL,
   `birthdate` date NOT NULL,
-  `admin` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `admin` int NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `membres`
+-- Dumping data for table `membres`
 --
 
 INSERT INTO `membres` (`id`, `pseudo`, `mail`, `motdepasse`, `birthdate`, `admin`) VALUES
@@ -146,26 +138,26 @@ INSERT INTO `membres` (`id`, `pseudo`, `mail`, `motdepasse`, `birthdate`, `admin
 (2, 'Karao', 'liamvaganay61@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2001-08-18', 0),
 (6, 'araao', 'fdzdragon82@gmail.com', '03d87cf10d18efb61eeceec718a6bca0', '2000-01-01', 0),
 (7, 'Nolvshy', 'yukilovewaifu@gmail.com', '906e047e09378b875ea96799f23fc36d', '2000-10-06', 0),
-(8, 'Volpe08', 'f.rivetdurzy@gmail.com', 'a34ddc352aa9a504e0b14d3bb85773b1', '2001-01-01', 1);
+(8, 'Volpe08', 'f.rivetdurzy@gmail.com', 'a34ddc352aa9a504e0b14d3bb85773b1', '2001-01-01', 1),
+(9, 'testAdmin', 'testAdmin@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', '2002-02-13', 1),
+(10, 'testUser', 'testUser@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', '2002-02-14', 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `team`
+-- Table structure for table `team`
 --
 
-DROP TABLE IF EXISTS `team`;
-CREATE TABLE IF NOT EXISTS `team` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` text CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+CREATE TABLE `team` (
+  `id` int NOT NULL,
+  `pseudo` text CHARACTER SET utf8mb3 COLLATE utf8mb3_swedish_ci NOT NULL,
   `role` text NOT NULL,
   `grade` text NOT NULL,
-  `Admin` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+  `Admin` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `team`
+-- Dumping data for table `team`
 --
 
 INSERT INTO `team` (`id`, `pseudo`, `role`, `grade`, `Admin`) VALUES
@@ -181,7 +173,76 @@ INSERT INTO `team` (`id`, `pseudo`, `role`, `grade`, `Admin`) VALUES
 (18, 'Jared', 'trad, check', '', 0),
 (26, 'Nolvshy', 'Coloriste', 'Chef Coloriste', 1),
 (21, 'Karao', 'Développeur', 'Développeur', 1),
-(27, 'Volpe08', 'edit, clean, coloriste, Leader', 'Leader', 1);
+(27, 'Volpe08', 'edit, clean, coloriste, Leader', 'Leader', 1),
+(28, 'testAdmin', 'edit, clean, coloriste, Leader', 'test', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `chapitre`
+--
+ALTER TABLE `chapitre`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mangas`
+--
+ALTER TABLE `mangas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `membres`
+--
+ALTER TABLE `membres`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `team`
+--
+ALTER TABLE `team`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `chapitre`
+--
+ALTER TABLE `chapitre`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `commentaire`
+--
+ALTER TABLE `commentaire`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `mangas`
+--
+ALTER TABLE `mangas`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `membres`
+--
+ALTER TABLE `membres`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `team`
+--
+ALTER TABLE `team`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
