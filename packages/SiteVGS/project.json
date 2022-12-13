@@ -20,7 +20,7 @@
         "cwd": "packages/SiteVGS",
         "commands": [
           {
-            "command": "php -S localhost:8000 &"
+            "command": "start /B php -S localhost:4443"
           }
         ]
       }
