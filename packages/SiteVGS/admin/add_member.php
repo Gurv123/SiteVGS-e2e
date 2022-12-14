@@ -61,14 +61,14 @@ if(isset($erreur)) {
 }
 ?>
     <div class="choices form">
-        <form method="post" class="projet" enctype="multipart/form-data">
+        <form method="post" class="projet" enctype="multipart/form-data" data-cy="add-member-form">
             <table>
                 <tr>
                     <td>
                         <label for="fileUpload">Image :</label>
                     </td>
                     <td>
-                        <input class="filup" type="file" name="userfile" id="fileUpload">
+                        <input class="filup" type="file" name="userfile" id="fileUpload" data-cy="add-member-img" >
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +82,7 @@ if(isset($erreur)) {
                         <label for="pseudo">Pseudo :</label>
                     </td>
                     <td>
-                        <input class="text" type="text" name="pseudo" placeholder="Pseudo">
+                        <input class="text" type="text" name="pseudo" placeholder="Pseudo" data-cy="add-member-username">
                     </td>
                 </tr>
                 <tr>
@@ -90,7 +90,7 @@ if(isset($erreur)) {
                         <label for="role">Rôle :</label>
                     </td>
                     <td>
-                        <input class="text" type="text" name="role" placeholder="rôle">
+                        <input class="text" type="text" name="role" placeholder="rôle" data-cy="add-member-role">
                     </td>
                 </tr>
                 <tr>
@@ -104,7 +104,7 @@ if(isset($erreur)) {
                         <label for="grade">Grade :</label>
                     </td>
                     <td>
-                        <input class="text" type="text" name="grade" placeholder="grade">
+                        <input class="text" type="text" name="grade" placeholder="grade" data-cy="add-member-grade">
                     </td>
                 </tr>
                 <tr>
@@ -114,7 +114,7 @@ if(isset($erreur)) {
                     </td>
                 </tr>
             </table>
-            <input class="input-select formchoice" type="submit" formmethod="post" name="formcreate" value="Valider !">
+            <input class="input-select formchoice" type="submit" formmethod="post" name="formcreate" value="Valider !" data-cy="add-member-submit">
         </form>
     </div>
 

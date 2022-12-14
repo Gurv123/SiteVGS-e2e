@@ -37,9 +37,11 @@ else
     <div align="center" class="config">
         <h3>Cette page vous permet d'interagir avec différentes interfaces du site comme ajouter des membres, en supprimer et modifier des projets</h3>
         <br>
-        <h4>Pour ajouter un membre cliquer <a class="config" href="add_member.php" style="color: darkred">ici</a></h4>
+        <h4>Pour ajouter un membre à la team cliquer <a class="config" href="add_member.php" style="color: darkred" data-cy="add-member-team" >ici</a></h4>
         <br>
-        <h4>Pour modifier un membre <a class="config" href="select_team.php" style="color: darkred">ici</a></h4>
+        <h4>Pour modifier un membre de la team <a class="config" href="select_team.php" style="color: darkred" data-cy="update-member-team">ici</a></h4>
+        <br>
+        <h4>Pour supprimer un(des) membre(s) de la teamn cliquer <a class="config" href="delete_member_team.php" style="color: darkred" data-cy="delete-members-team">ici</a></h4>
         <br>
         <h4>Pour supprimer un(des) membre(s) cliquer <a class="config" href="delete_member.php" style="color: darkred" data-cy="delete-members">ici</a></h4>
         <br>
