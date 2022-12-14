@@ -64,6 +64,18 @@ describe('Admin', () => {
     cy.get('[data-cy="pseudo-member"]').contains('userTest').should('not.exist')
   })
 
+  it('delete Mangas', () => {
+    // Delete Mangas and check it
+    cy.get('[data-cy="delete-mangas"]').should('exist').click()
+    cy.url().should('include', '/admin/delete_mangas.php')
+    cy.get('[data-cy="Five Senses"]').should('exist').check()
+    cy.get('[data-cy="submit-delete-mangas"]').should('exist').click()
+    cy.url().should('include', '/admin/config.php')
+    cy.get('[data-cy="delete-mangas"]').should('exist').click()
+    cy.url().should('include', '/admin/delete_mangas.php')
+    cy.get('[data-cy="Five Senses"]').should('not.exist')
+  })
+
   afterEach(() => {
     // logout
     cy.get('[data-cy="nav-ul-admin"]').children().should('contain', 'Deconnexion')
