@@ -75,6 +75,23 @@ describe('Admin', () => {
     cy.get('[data-cy="create_chapter"]').should('exist').click()
 
 
+  })
+
+  it('Create project', () => {
+    cy.get('[data-cy="upload"]').should('exist').click()
+    cy.url().should('include', '/admin/upload.php')
+    cy.get('[data-cy="create_project"]').should('exist').click()
+    cy.get('[data-cy="img_project"]').should('exist').selectFile('src/fixtures/1.jpg')
+    cy.get('[data-cy="name_project"]').should('exist').type('aaaaaaaaaaaaaaaaaaa')
+    cy.get('[data-cy="name_project_alternative"]').should('exist').type('bbbbbbbbbbbbbb')
+    cy.get('[data-cy="Auteur"]').should('exist').type('azazazaz')
+    cy.get('[data-cy="Artiste"]').should('exist').type('azazazaz')
+    cy.get('[data-cy="Status"]').should('exist').type('En cours')
+    cy.get('[data-cy="Annee"]').should('exist').type('2020')
+    cy.get('[data-cy="genre"]').should('exist').type('Action, ecchi')
+    cy.get('[data-cy="description"]').should('exist').type('TEsttesttestsoidjfklsjvlkognosnohdvoilsoij soin os oeh goshg ohzouhgoushkjjgb zoeshgou')
+    cy.get('[data-cy="Create_project"]').should('exist').click()
+
 
   })
 

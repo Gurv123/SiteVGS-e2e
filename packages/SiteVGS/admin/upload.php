@@ -316,7 +316,7 @@ if (isset($erreur)) {
     <input class="input-select <?= $upload ?>" formmethod="post" value="Upload un Chapitre" type="submit" id="uplaod"
            name="upload" data-cy="upload_chapter">
     <input class="input-select <?= $create ?>" formmethod="post" value="Créer un projet" type="submit" id="create"
-           name="create">
+           name="create" data-cy="create_project">
     <input class="input-select <?= $supp ?>" formmethod="post" value="Supprimer un Chapitre" type="submit" id="supp"
            name="supp">
 
@@ -331,7 +331,7 @@ if (isset($erreur)) {
                     <label for="fileUpload">Image :</label>
                 </td>
                 <td>
-                    <input class="filup" type="file" name="userfile" id="fileUpload">
+                    <input class="filup" type="file" name="userfile" data-cy="img_project" id="fileUpload">
                     <p class="note"><strong>Note : La dimension minimum est de 350x250px</strong></p>
                 </td>
             </tr>
@@ -340,7 +340,7 @@ if (isset($erreur)) {
                     <label for="nom">Nom Complet :</label>
                 </td>
                 <td>
-                    <input class="text" type="text" name="nom" placeholder="Nom complet" id="nom">
+                    <input class="text" type="text" name="nom" placeholder="Nom complet" data-cy="name_project" id="nom">
                 </td>
             </tr>
             <tr>
@@ -348,7 +348,7 @@ if (isset($erreur)) {
                     <label for="other_name">Noms alternatifs :</label>
                 </td>
                 <td>
-                    <input type="text" class="text" id="nom_alternatifs" name="nom_alternatifs"
+                    <input type="text" class="text" id="nom_alternatifs" data-cy="name_project_alternative" name="nom_alternatifs"
                            placeholder="Nom(s) Alternatif(s)">
                 </td>
             </tr>
@@ -357,7 +357,7 @@ if (isset($erreur)) {
                     <label for="auteur">Auteur(s) :</label>
                 </td>
                 <td>
-                    <input class="text" id="auteur" name="auteur" type="text" placeholder="Auteur(s)">
+                    <input class="text" id="auteur" name="auteur" type="text" data-cy="Auteur" placeholder="Auteur(s)">
                 </td>
             </tr>
             <tr>
@@ -365,7 +365,7 @@ if (isset($erreur)) {
                     <label for="artiste">Artiste(s) :</label>
                 </td>
                 <td>
-                    <input class="text" id="artiste" name="artiste" type="text" placeholder="Artiste(s)">
+                    <input class="text" id="artiste" name="artiste" type="text" data-cy="Artiste" placeholder="Artiste(s)">
                 </td>
             </tr>
             <tr>
@@ -373,7 +373,7 @@ if (isset($erreur)) {
                     <label for="status">Status :</label>
                 </td>
                 <td>
-                    <input class="text" type="text" id="status" name="status" placeholder="status">
+                    <input class="text" type="text" id="status" name="status" data-cy="Status" placeholder="status">
                 </td>
             </tr>
             <tr>
@@ -381,7 +381,7 @@ if (isset($erreur)) {
                     <label for="annee">Année :</label>
                 </td>
                 <td>
-                    <input class="text" type="number" formmethod="post" name="annee" placeholder="Année" id="annee">
+                    <input class="text" type="number" formmethod="post" name="annee" data-cy="Annee" placeholder="Année" id="annee">
                 </td>
             </tr>
             <tr>
@@ -389,7 +389,7 @@ if (isset($erreur)) {
                     <label for="genre">Genre :</label>
                 </td>
                 <td>
-                    <input class="text genre" formmethod="post" name="genre" placeholder="genre(s) : Action, Ecchi,..."
+                    <input class="text genre" formmethod="post" name="genre" data-cy="genre" placeholder="genre(s) : Action, Ecchi,..."
                            id="genre">
                 </td>
             </tr>
@@ -398,12 +398,12 @@ if (isset($erreur)) {
                     <label for="description">Description :</label>
                 </td>
                 <td>
-                    <input class="text" formmethod="post" id="description" name="description" type="text"
+                    <input class="text" formmethod="post" id="description" data-cy="description" name="description" type="text"
                            placeholder="description">
                 </td>
             </tr>
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formcreate" value="Valider !">
+        <input class="input-select formchoice" type="submit" formmethod="post" data-cy="Create_project" name="formcreate" value="Valider !">
     </form>
 </div>
 
