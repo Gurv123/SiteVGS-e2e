@@ -23,7 +23,7 @@ describe('Admin', () => {
     cy.url().should('include', '/admin/config.php')
   })
 
-  it('Add Member on Team', () => {
+  it('Add Team Member', () => {
     // Add Team Member
     cy.get('[data-cy="add-member-team"]').should('exist').click()
     cy.url().should('include', '/admin/add_member.php')
@@ -38,7 +38,7 @@ describe('Admin', () => {
     cy.get('[data-cy="update-member-team-username"]').contains('userTest').should('exist')
   })
 
-  it('Update Member on Team', () => {
+  it('Update Team Member', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false;
     })
@@ -75,7 +75,6 @@ describe('Admin', () => {
     cy.get('[data-cy="delete-members"]').click()
     cy.get('[data-cy="pseudo-member"]').contains('userTest').should('not.exist')
   })
-
 
   it('Add Chapter', () => {
     cy.get('[data-cy="upload"]').should('exist').click()
