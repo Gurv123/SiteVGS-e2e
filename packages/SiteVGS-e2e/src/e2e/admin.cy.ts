@@ -64,6 +64,20 @@ describe('Admin', () => {
     cy.get('[data-cy="pseudo-member"]').contains('userTest').should('not.exist')
   })
 
+
+  it('Add Chapter', () => {
+    cy.get('[data-cy="upload"]').should('exist').click()
+    cy.url().should('include', '/admin/upload.php')
+    cy.get('[data-cy="upload_chapter"]').should('exist').click()
+    cy.get('[data-cy="name_project_manga"]').should('exist').type('A Girl Like Alien')
+    cy.get('[data-cy="file_zip"]').should('exist').selectFile('src/fixtures/35MANGA.zip')
+    cy.get('[data-cy="number_chapter"]').should('exist').type('1')
+    cy.get('[data-cy="create_chapter"]').should('exist').click()
+
+
+
+  })
+
   afterEach(() => {
     // logout
     cy.get('[data-cy="nav-ul-admin"]').children().should('contain', 'Deconnexion')
