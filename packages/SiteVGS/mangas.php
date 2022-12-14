@@ -15,6 +15,8 @@ $en_pause = $visible;
 $termines = $visible;
 
 
+$index_en_cours = 0;
+
 if (isset($_POST['tous'])) {
     $tous = $focus;
     $en_cours = $visible;
@@ -79,8 +81,9 @@ $termine = $bdd->query('SELECT * FROM mangas WHERE status Like("termines")');
     <h3><u>En Cours :</u></h3>
     <div class="group">
         <?php while ($donnees = $cours->fetch()): ?>
+            <?php $index_en_cours++ ?>
             <div class="solo">
-                <a href="projet.php?name=<?= $donnees['nom'] ?>">
+                <a href="projet.php?name=<?= $donnees['nom'] ?>" data-cy="manga-en-cours-<?= $index_en_cours ?>">
                     <img class="image_solo" src="img/mangas/<?= $donnees['nom'] ?>.jpg">
                     <p class="name"><?= $donnees['nom'] ?></p>
                 </a>
