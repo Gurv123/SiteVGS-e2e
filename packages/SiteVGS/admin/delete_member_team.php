@@ -67,7 +67,7 @@ if(isset($erreur)) {
     </tr>
     <?php endwhile; ?>
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formdelete" value="Supprimer !" data-cy="delete-member-submit">
+        <input class="input-select formchoice" type="submit" formmethod="post" name="formdelete" value="Supprimer !" data-cy="delete-member-team-submit">
     </form>
 </div>
 

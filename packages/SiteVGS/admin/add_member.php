@@ -33,10 +33,11 @@ $uploaddir = '../img/team/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
     if (!empty($_POST['pseudo']) and !empty($_POST['role'])) {
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-            $insertmbr = $bdd->prepare("INSERT INTO team(pseudo, role, grade) VALUES(?, ?, ?)");
-            $insertmbr->execute(array($pseudo, $role, $grade));
+            $insertmbr = $bdd->prepare("INSERT INTO team(pseudo, role, grade, admin) VALUES(?, ?, ?, ?)");
+            $insertmbr->execute(array($pseudo, $role, $grade, 1));
             rename($uploadfile, "../img/team/" . $_POST['pseudo'] . ".jpg");
-            $erreur = "Un nouveau membre vient d'être ajouter à la base de donnée " . print_r($insertmbr);
+            $erreur = "Un nouveau membre vient d'être ajouter à la base de donnée ";
+            header("Location: config.php");
         } else {
             $erreur = "L'image n'est malheureusement pas passée, veuillez recommencer svp";
         }

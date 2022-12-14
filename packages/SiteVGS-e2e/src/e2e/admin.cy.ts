@@ -5,8 +5,7 @@ describe('Admin', () => {
     cy.visit(baseUrl)
 
     // Login
-    cy.get('[data-cy="nav-ul"]').children().should('contain', 'CONNEXION')
-    cy.get('[data-cy="login"]').click()
+    cy.get('[data-cy="login"]').should('exist').click()
     cy.url().should('include', '/vgs-connect')
     cy.get('[data-cy="login-username"]').should('exist').type('testAdmin')
     cy.get('[data-cy="login-password"]').should('exist').type('testtest')
@@ -16,20 +15,19 @@ describe('Admin', () => {
     cy.url().should('include', '/index.php')
 
     // Check si dans la navbar le lien paramètre est bien là
-    cy.get('[data-cy="nav-ul"]').children().should('contain', 'PARAMÈTRE')
-    cy.get('[data-cy="settings"]').click()
+    cy.get('[data-cy="settings"]').should('exist').click()
     cy.url().should('include', '/admin/profil.php?name=')
 
     // Ensuite on check si lien config est bien là
-    cy.get('[data-cy="nav-ul-admin"]').children().should('contain', 'Config')
-    cy.get('[data-cy="config"]').click()
+    cy.get('[data-cy="config"]').should('exist').click()
     cy.url().should('include', '/admin/config.php')
   })
 
   it('Add Member on Team', () => {
+    // Add Team Member
     cy.get('[data-cy="add-member-team"]').should('exist').click()
     cy.url().should('include', '/admin/add_member.php')
-    cy.get('[data-cy="add-member-img"]').should('exist').selectFile('/packages/SiteVGS/img/team/test.jpg')
+    cy.get('[data-cy="add-member-img"]').should('exist').selectFile('src/fixtures/test.jpg')
     cy.get('[data-cy="add-member-username"]').should('exist').type('userTest')
     cy.get('[data-cy="add-member-role"]').should('exist').type('clean')
     cy.get('[data-cy="add-member-grade"]').should('exist').type('sous-chef')
@@ -37,15 +35,29 @@ describe('Admin', () => {
     cy.url().should('include', '/admin/config.php')
     cy.get('[data-cy="update-member-team"]').should('exist').click()
     cy.url().should('include', '/admin/select_team.php')
-    cy.get('[data-cy="update-member-team-username"]').should('exist')
+    cy.get('[data-cy="update-member-team-username"]').contains('userTest').should('exist')
   })
 
   it('Update Member on Team', () => {
-    cy.get('[data-cy="update-member-team"]').should('exist').click()
-  })
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false;
+    })
 
-  it('Delete Member of Team', () => {
-    // Delete Member of team and check it
+    // Update data of a Team Member
+    cy.get('[data-cy="update-member-team"]').should('exist').click();
+    cy.url().should('include', '/admin/select_team.php');
+    cy.get('[data-cy="update-member-team-username"]').contains('userTest').should('exist');
+    cy.get('[data-cy="update-member-team-radio"]').check('userTest');
+    cy.get('[data-cy="update-member-team-submit"]').should('exist').click();
+    cy.url().should('include', '/admin/modif_team.php?name=');
+    cy.get('[data-cy="modif-team-role"]').should('exist').type('clean');
+    cy.get('[data-cy="modif-team-grade"]').should('exist').type('sous-chef');
+    cy.get('[data-cy="modif-team-admin"]').should('exist').type('1');
+    cy.get('[data-cy="modif-team-submit"]').should('exist').click();
+  });
+
+  it('Delete Team Member', () => {
+    // Delete Team Member and check it
     cy.get('[data-cy="delete-members-team"]').should('exist').click()
     cy.url().should('include', '/admin/delete_member_team.php')
     cy.get('[data-cy="delete-member-team"]').check('userTest')
@@ -73,15 +85,11 @@ describe('Admin', () => {
     cy.get('[data-cy="file_zip"]').should('exist').selectFile('src/fixtures/35MANGA.zip')
     cy.get('[data-cy="number_chapter"]').should('exist').type('1')
     cy.get('[data-cy="create_chapter"]').should('exist').click()
-
-
-
   })
 
   afterEach(() => {
     // logout
-    cy.get('[data-cy="nav-ul-admin"]').children().should('contain', 'Deconnexion')
-    cy.get('[data-cy="logout"]').click()
+    cy.get('[data-cy="logout"]').should('exist').click()
     cy.url().should('include', '/index.php')
   })
 });

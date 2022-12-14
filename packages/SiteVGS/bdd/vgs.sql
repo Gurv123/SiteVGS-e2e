@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 11, 2022 at 02:38 PM
+-- Generation Time: Dec 14, 2022 at 04:14 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -140,7 +140,8 @@ INSERT INTO `membres` (`id`, `pseudo`, `mail`, `motdepasse`, `birthdate`, `admin
 (7, 'Nolvshy', 'yukilovewaifu@gmail.com', '906e047e09378b875ea96799f23fc36d', '2000-10-06', 0),
 (8, 'Volpe08', 'f.rivetdurzy@gmail.com', 'a34ddc352aa9a504e0b14d3bb85773b1', '2001-01-01', 1),
 (9, 'testAdmin', 'testAdmin@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', '2002-02-13', 1),
-(10, 'testUser', 'testUser@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', '2002-02-14', 0);
+(10, 'testUser', 'testUser@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', '2002-02-14', 0),
+(11, 'userTest', 'user@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', '2002-01-01', 0);
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,7 @@ ALTER TABLE `mangas`
 -- AUTO_INCREMENT for table `membres`
 --
 ALTER TABLE `membres`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `team`
