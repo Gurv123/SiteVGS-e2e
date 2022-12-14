@@ -4,6 +4,6 @@ import { nxE2EPreset } from '@nrwl/cypress/plugins/cypress-preset';
 export default defineConfig({
   e2e: {
     ...nxE2EPreset(__dirname),
-    baseUrl: 'http://localhost:4443'
+    baseUrl: 'http://localhost:8000'
   } 
 });
