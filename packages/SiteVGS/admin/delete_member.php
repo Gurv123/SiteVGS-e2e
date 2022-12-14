@@ -3,12 +3,12 @@ require '../function/auth.php';
 forcer_utilisateur_connecte();
 require 'nav_admin.php';
 include("../bdd/connection_bdd.php");
-$pseudo = $bdd->query('SELECT pseudo FROM team');
+$pseudo = $bdd->query('SELECT pseudo FROM membres');
 
 
 
 
-$print = $bdd->query('SELECT * FROM team WHERE pseudo = "'.$_SESSION["pseudo"].'"' );
+$print = $bdd->query('SELECT * FROM membres WHERE pseudo = "'.$_SESSION["pseudo"].'"' );
 $code = $print->fetch();
 
 
@@ -27,7 +27,7 @@ if (isset($_POST['formdelete'])) {
     $postpseudo = $_POST['delpseudo'];
     foreach ($postpseudo as $delpseudo) {
         unlink("../img/team/" . $delpseudo . ".jpg");
-        $deletembr = "DELETE FROM team WHERE pseudo = '$delpseudo'";
+        $deletembr = "DELETE FROM membres WHERE pseudo = '$delpseudo'";
         $bdd->exec($deletembr);
     }
     $erreur = "Un membre vient d'être supprimer de la base de donnée, vous aller être rediriger !";
@@ -54,20 +54,20 @@ if(isset($erreur)) {
 </div>
 
 <div class="choices form">
-    <form method="POST">
+    <form method="POST" data-cy="delete-member-form">
         <table>
     <?php while ($donnees = $pseudo->fetch()): ?>
     <tr>
         <td>
-            <input type="checkbox" name="delpseudo[]" id="delpseudo" value="<?= $donnees['pseudo'] ?>">
+            <input type="checkbox" name="delpseudo[]" id="delpseudo" value="<?= $donnees['pseudo'] ?>" data-cy="delete-member" >
         </td>
         <td>
-            <label for="delpseudo"><?= $donnees['pseudo'] ?></label>
+            <label for="delpseudo" data-cy="pseudo-member"><?= $donnees['pseudo'] ?></label>
         </td>
     </tr>
     <?php endwhile; ?>
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formdelete" value="Supprimer !">
+        <input class="input-select formchoice" type="submit" formmethod="post" name="formdelete" value="Supprimer !" data-cy="delete-member-submit">
     </form>
 </div>
 

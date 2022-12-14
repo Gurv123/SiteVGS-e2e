@@ -41,7 +41,7 @@ else
         <br>
         <h4>Pour modifier un membre <a class="config" href="select_team.php" style="color: darkred">ici</a></h4>
         <br>
-        <h4>Pour supprimer un(des) membre(s) cliquer <a class="config" href="delete_member.php" style="color: darkred">ici</a></h4>
+        <h4>Pour supprimer un(des) membre(s) cliquer <a class="config" href="delete_member.php" style="color: darkred" data-cy="delete-members">ici</a></h4>
         <br>
         <h4>Pour supprimer un(des) projet(s) (mangas) cliquer <a class="config" href="delete_mangas.php" style="color: darkred">ici</a></h4>
         <br>

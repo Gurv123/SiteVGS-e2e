@@ -53,14 +53,14 @@ require 'complements/header.php';
 <div align="center">
     <h2>Connexion</h2>
     <br><br>
-    <form method="POST">
+    <form method="POST" data-cy="login-form" >
         <table>
             <tr>
                 <td align="right">
                     <label for="pseudo">Pseudo :</label>
                 </td>
                 <td>
-                    <input autocomplete="on" class="text" type="text" placeholder="pseudo" name="pseudo" />
+                    <input autocomplete="on" class="text" type="text" placeholder="pseudo" name="pseudo" data-cy="login-username" />
                 </td>
             </tr>
             <tr>
@@ -68,12 +68,12 @@ require 'complements/header.php';
                     <label for="mdpconnect">Mot de passe :</label>
                 </td>
                 <td>
-                    <input autocomplete="off" class="text" type="password" placeholder="mot de passe" name="mdpconnect" />
+                    <input autocomplete="off" class="text" type="password" placeholder="mot de passe" name="mdpconnect" data-cy="login-password" />
                 </td>
             </tr>
         </table>
         <br><br>
-        <input class="button" type="submit" name="formconnexion" value="Se connecter !" />
+        <input class="button" type="submit" name="formconnexion" value="Se connecter !" data-cy="login-submit" />
     </form>
     <div align="center">
         <a href="motdepasse.php" class="oublie" style="color: red;">Mot de passe oublié !</a>
