@@ -1,19 +1,19 @@
 <?php
 include("./bdd/connection_bdd.php");
 
-if(isset($_POST['forminscription'])) {
+if (isset($_POST['forminscription'])) {
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $mail = htmlspecialchars($_POST['mail']);
     $mail2 = htmlspecialchars($_POST['mail2']);
     $date = htmlspecialchars($_POST['age']);
 
-    if(!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mail2']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
-        if(strlen($pseudo) <= 255) {
+    if (!empty($_POST['pseudo']) and !empty($_POST['mail']) and !empty($_POST['mail2']) and !empty($_POST['mdp']) and !empty($_POST['mdp2'])) {
+        if (strlen($pseudo) <= 255) {
 
             $reqpseudo = $bdd->prepare("SELECT pseudo FROM membres WHERE pseudo = ?");
             $reqpseudo->execute(array($pseudo));
             $pseudoexist = $reqpseudo->fetch();
-            if($pseudoexist == 0) {
+            if ($pseudoexist == 0) {
                 if (strlen($_POST['mdp']) >= 8) {
                     $mdp = md5($_POST['mdp']);
                     $mdp2 = md5($_POST['mdp2']);
@@ -65,6 +65,7 @@ require 'complements/header.php';
 ?>
 
 <html class="" id="toggle_page">
+
 <head>
     <title>Inscription</title>
     <meta charset="utf-8">
@@ -73,10 +74,10 @@ require 'complements/header.php';
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script>
-        codebinaire= 111111111111111111111;
+        codebinaire = 111111111111111111111;
 
         var myString = "somestring et test";
-        var myNum =parseInt(codebinaire,2); /* 2913141654103084 */
+        var myNum = parseInt(codebinaire, 2); /* 2913141654103084 */
         var binaire = myString.toString(2);
         console.log(myNum);
         console.log(binaire);
@@ -90,88 +91,98 @@ require 'complements/header.php';
     </script>
 </head>
 <style>
-    html{
+    html {
         margin-top: 150px;
     }
 </style>
 
 <body>
-<div align="center">
-    <h2><u>Inscription :</u></h2>
-    <br><br>
-    <form method="POST" autocomplete="on">
-        <table>
-            <tr>
-                <td align="right">
-                    <label for="pseudo">Pseudo :</label>
-                </td>
-                <td>
-                    <input class="text" autocomplete="off" type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" minlength="3" required />
-                </td>
-            </tr>
-            <tr>
-                <td align="right ">
-                    <label for="mail">Mail :</label>
-                </td>
-                <td>
-                    <input class="text" autocomplete="off" type="email" placeholder="Votre mail" id="mail" name="mail" required />
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="mail2">Confirmation du mail :</label>
-                </td>
-                <td>
-                    <input class="text" autocomplete="off" type="email" placeholder="Confirmez votre mail" id="mail2" name="mail2" required/>
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="mdp">Mot de passe :</label>
-                </td>
-                <td>
-                    <input class="text" autocomplete="off" type="password" minlength="8" placeholder="Votre mot de passe" id="mdp" name="mdp" required/>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td align="center">
-                    <p class="note"><strong>Note : Votre mot de passe doit contenir au moins 8 caractères</strong></p>
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="mdp2">Confirmation du mot de passe :</label>
-                </td>
-                <td>
-                    <input class="text" autocomplete="off" type="password" minlength="8" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" required/>
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="age">Date de naissance :</label>
-                </td>
-                <td>
-                    <input class="text" type="date" id="dage" name="age" value="2020-01-01" min="1950-01-01" max="2050-12-31" required>
-                </td>
-            </tr>
-        </table>
+    <div align="center">
+        <h2><u>Inscription :</u></h2>
         <br><br>
-        <input class="button" type="submit" name="forminscription" value="Inscription" />
-    </form>
+        <form method="POST" autocomplete="on">
+            <table>
+                <tr>
+                    <td align="right">
+                        <label for="pseudo">Pseudo :</label>
+                    </td>
+                    <td>
+                        <input data-cy="registration-pseudo" class="text" autocomplete="off" type="text"
+                            placeholder="Votre pseudo" id="pseudo" name="pseudo" minlength="3" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right ">
+                        <label for="mail">Mail :</label>
+                    </td>
+                    <td>
+                        <input data-cy="registration-mail" class="text" autocomplete="off" type="email"
+                            placeholder="Votre mail" id="mail" name="mail" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="mail2">Confirmation du mail :</label>
+                    </td>
+                    <td>
+                        <input data-cy="registration-mail2" class="text" autocomplete="off" type="email"
+                            placeholder="Confirmez votre mail" id="mail2" name="mail2" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="mdp">Mot de passe :</label>
+                    </td>
+                    <td>
+                        <input data-cy="registration-password" class="text" autocomplete="off" type="password"
+                            minlength="8" placeholder="Votre mot de passe" id="mdp" name="mdp" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center">
+                        <p class="note"><strong>Note : Votre mot de passe doit contenir au moins 8 caractères</strong>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="mdp2">Confirmation du mot de passe :</label>
+                    </td>
+                    <td>
+                        <input data-cy="registration-password2" class="text" autocomplete="off" type="password"
+                            minlength="8" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="age">Date de naissance :</label>
+                    </td>
+                    <td>
+                        <input data-cy="registration-birthdate" class="text" type="date" id="dage" name="age"
+                            value="2020-01-01" min="1950-01-01" max="2050-12-31" required>
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+            <input data-cy="registration-submit" class="button" type="submit" name="forminscription"
+                value="Inscription" />
+        </form>
 
-    <?php
-    if(isset($erreur)) {
-        echo '<font color="red">'.$erreur."</font>";
-    }
-    ?>
-</div>
+        <?php
+        if (isset($erreur)) {
+            echo '<font color="red">' . $erreur . "</font>";
+        }
+        ?>
+    </div>
 
-<br>
-<div align="center" style="color: red;">
-    <p><u>Si t'as déjà un compte clique <a style="color: darkred" href="vgs-connect.php">ici</a></u></p>
-</div>
-<?php require 'complements/footer.php'; ?>
-<script type="text/javascript" src="js/toogle_theme.js"></script>
+    <br>
+    <div align="center" style="color: red;">
+        <p><u>Si t'as déjà un compte clique <a data-cy="already-registered-login" style="color: darkred"
+                    href="vgs-connect.php">ici</a></u></p>
+    </div>
+    <?php require 'complements/footer.php'; ?>
+    <script type="text/javascript" src="js/toogle_theme.js"></script>
 </body>
+
 </html>
