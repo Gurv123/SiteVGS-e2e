@@ -35,4 +35,11 @@ describe('Admin', () => {
     cy.get('[data-cy="delete-members"]').click()
     cy.get('[data-cy="pseudo-member"]').contains('Floflo1').should('not.exist')
   })
+
+  afterEach(() => {
+    // logout
+    cy.get('[data-cy="nav-ul"]').children().should('contain', 'DÉCONNEXION')
+    cy.get('[data-cy="login"]').click()
+    cy.url().should('include', '/index.php')
+  })
 });
