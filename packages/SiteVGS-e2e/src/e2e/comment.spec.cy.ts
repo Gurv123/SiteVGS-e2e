@@ -32,12 +32,12 @@ describe('empty spec', () => {
   })
 
   it('should leave a comment on a manga page as a user', () => {
-    //on passe l'username userTest en parametre
+    //on passe l'username testUser en parametre
     cy.postcomment("testUser","testtest")
   })
 
   it('should leave a comment on a manga page as an admin', () => {
-    //on passe l'username userTest en parametre
+    //on passe l'username testAdmin en parametre
     cy.postcomment("testAdmin","testtest")
   })
 
