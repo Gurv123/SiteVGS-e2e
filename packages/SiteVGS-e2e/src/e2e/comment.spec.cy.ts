@@ -8,7 +8,7 @@ import * as cypress from 'cypress';
 
 
 
-describe('empty spec', () => {
+describe('comment manga', () => {
 
 
  
