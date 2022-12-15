@@ -51,7 +51,8 @@ if ($_SESSION['poste'] == 1) {
         <h4>Pour supprimer un(des) projet(s) (mangas) cliquer <a class="config" href="delete_mangas.php"
                 style="color: darkred" data-cy="delete-mangas">ici</a></h4>
         <br>
-        <h4>Pour modifier un projet cliquer <a class="config" href="select_project.php" style="color: darkred">ici</a>
+        <h4>Pour modifier un projet cliquer <a class="config" href="select_project.php" style="color: darkred"
+                data-cy="update-project">ici</a>
         </h4>
     </div>
 

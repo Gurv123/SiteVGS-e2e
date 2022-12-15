@@ -115,6 +115,37 @@ describe('Admin', () => {
     cy.get('[data-cy="Create_project"]').should('exist').click()
   })
 
+  it('Update project', () => {
+    // Modification d'un projet
+    cy.get('[data-cy="update-project"]').should('exist').click()
+    cy.url().should('include', '/admin/select_project.php')
+    cy.get('[data-cy="projects-list"]').should('exist').type('Universe And Sword')
+    cy.get('[data-cy="update-selected-project"]').should('exist').click()
+    cy.url().should('include', '/admin/modif_project.php?name=Universe%20And%20Sword')
+    cy.get('[data-cy="update-name"]').should('exist').type('UniverseAndSword')
+    cy.get('[data-cy="update-alternative-name"]').should('exist').type('UniverseAndSword')
+    cy.get('[data-cy="update-author"]').should('exist').type('SIN SIN')
+    cy.get('[data-cy="update-artist"]').should('exist').type('SIN SIN')
+    cy.get('[data-cy="update-status"]').should('exist').select('en cours')
+    cy.get('[data-cy="update-year"]').should('exist').type('2154')
+    cy.get('[data-cy="update-genre"]').should('exist').type('Homard')
+    cy.get('[data-cy="update-description"]').should('exist').type('Description de la description')
+    cy.get('[data-cy="submit-update"]').should('exist').click()
+    cy.url().should('include', '/admin/select_project.php')
+
+    // Vérification de la prise en compte des modifications
+    cy.get('[data-cy="projects-list"]').should('exist').type('UniverseAndSword')
+    cy.get('[data-cy="update-selected-project"]').should('exist').click()
+    cy.url().should('include', '/admin/modif_project.php?name=UniverseAndSword')
+    cy.get('[data-cy="current-alternative-name"]').should('exist', 'have.value', 'UniverseAndSword')
+    cy.get('[data-cy="current-author"]').should('exist', 'have.value', 'SIN SIN')
+    cy.get('[data-cy="current-artist"]').should('exist', 'have.value', 'SIN SIN')
+    cy.get('[data-cy="current-status"]').should('exist', 'have.value', 'en cours')
+    cy.get('[data-cy="current-year"]').should('exist', 'have.value', '2154')
+    cy.get('[data-cy="current-genre"]').should('exist', 'have.value', 'Homard')
+    cy.get('[data-cy="current-description"]').should('exist', 'have.value', 'Description de la description')
+  })
+
   afterEach(() => {
     // logout
     cy.get('[data-cy="logout"]').should('exist').click()

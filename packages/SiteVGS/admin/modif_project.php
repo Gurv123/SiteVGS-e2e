@@ -6,17 +6,14 @@ include("../bdd/connection_bdd.php");
 
 
 
-$print = $bdd->query('SELECT * FROM team WHERE pseudo = "'.$_SESSION["pseudo"].'"' );
+$print = $bdd->query('SELECT * FROM team WHERE pseudo = "' . $_SESSION["pseudo"] . '"');
 $code = $print->fetch();
 
 
 
-if ($_SESSION['poste'] == 1  ){
+if ($_SESSION['poste'] == 1) {
 
-}
-
-else
-{
+} else {
     header('Location: ../index.php');
 
 }
@@ -86,8 +83,7 @@ if (isset($_POST['formmodif'])) {
         }
 
 
-    }
-    else {
+    } else {
 
         if (!empty($nom_alternatifs)) {
             $modifnamealt = $bdd->prepare("UPDATE mangas SET nom_alternatifs = '$nom_alternatifs' WHERE nom = '$getname'");
@@ -132,6 +128,7 @@ if (isset($_POST['formmodif'])) {
 
 ?>
 <html class="" id="toggle_page">
+
 <head>
     <title>Modification de mangas</title>
     <meta charset="UTF-8 sans BOM">
@@ -144,27 +141,26 @@ if (isset($_POST['formmodif'])) {
 
         function textareaSize(zoneTexte) {
             if (zoneTexte) {
-                nbrLignes=2;longueurDeLigne=2;
-                nbrLignesMax=18;longueurDeLigneMax=9;
-                lesLignes=escape(zoneTexte.value).split("%0D%0A");
-                if (lesLignes) {nbrLignes=lesLignes.length;}
-                if (nbrLignes>document.body.clientHeight/nbrLignesMax) {nbrLignes=document.body.clientHeight/nbrLignesMax;}
+                nbrLignes = 2; longueurDeLigne = 2;
+                nbrLignesMax = 18; longueurDeLigneMax = 9;
+                lesLignes = escape(zoneTexte.value).split("%0D%0A");
+                if (lesLignes) { nbrLignes = lesLignes.length; }
+                if (nbrLignes > document.body.clientHeight / nbrLignesMax) { nbrLignes = document.body.clientHeight / nbrLignesMax; }
 
                 if (lesLignes) {
-                    for(n=0; n<(lesLignes.length); n++) {
-                        if (longueurDeLigne<unescape(lesLignes[n]).length) {longueurDeLigne=unescape(lesLignes[n]).length;}
-                        if (longueurDeLigne>document.body.clientWidth/longueurDeLigneMax)
-                        {
-                            longueurDeLigne=document.body.clientWidth/longueurDeLigneMax;
-                            nbrLignes+=unescape(lesLignes[n]).length/(document.body.clientWidth/longueurDeLigneMax);
+                    for (n = 0; n < (lesLignes.length); n++) {
+                        if (longueurDeLigne < unescape(lesLignes[n]).length) { longueurDeLigne = unescape(lesLignes[n]).length; }
+                        if (longueurDeLigne > document.body.clientWidth / longueurDeLigneMax) {
+                            longueurDeLigne = document.body.clientWidth / longueurDeLigneMax;
+                            nbrLignes += unescape(lesLignes[n]).length / (document.body.clientWidth / longueurDeLigneMax);
                         }
                     }
                 }
-                else {longueurDeLigne=zoneTexte.value.length}
-                if (nbrLignes>document.body.clientHeight/nbrLignesMax) {nbrLignes=document.body.clientHeight/nbrLignesMax;}
+                else { longueurDeLigne = zoneTexte.value.length }
+                if (nbrLignes > document.body.clientHeight / nbrLignesMax) { nbrLignes = document.body.clientHeight / nbrLignesMax; }
 
-                zoneTexte.cols=(longueurDeLigne+1);
-                zoneTexte.rows=(nbrLignes+1);
+                zoneTexte.cols = (longueurDeLigne + 1);
+                zoneTexte.rows = (nbrLignes + 1);
             }
         }</script>
 
@@ -172,194 +168,244 @@ if (isset($_POST['formmodif'])) {
 </head>
 
 <body>
-<?php
-if(isset($erreur)) {
-    echo '<font color="red">'.$erreur."</font>";
-}
-?>
-<div align="center">
-    <h3>Veuillez selectionner et remplacer ce que vous voulez remplacer dans la base de donnée</h3>
-</div>
+    <?php
+    if (isset($erreur)) {
+        echo '<font color="red">' . $erreur . "</font>";
+    }
+    ?>
+    <div align="center">
+        <h3>Veuillez selectionner et remplacer ce que vous voulez remplacer dans la base de donnée</h3>
+    </div>
 
-<div class="form">
-    <form method="POST">
-        <table>
-            <tr>
-                <td>
-                    <label>Nom Actuel : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['nom'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name">Nouveau nom : </label>
-                </td>
-                <td>
-                    <input class="text" type="text" name="name" id="name">
-                </td>
-            </tr>
+    <div class="form">
+        <form method="POST">
+            <table>
+                <tr>
+                    <td>
+                        <label>Nom Actuel : </label>
+                    </td>
+                    <td>
+                        <label>
+                            <?= $donnees['nom'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label data-cy="current-name" for="name">Nouveau nom : </label>
+                    </td>
+                    <td>
+                        <input data-cy="update-name" class="text" type="text" name="name" id="name">
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Nom(s) alterniatif(s) actuel : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['nom_alternatifs'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="nom_alternatifs">Nouveau nom(s) alternatif(s) : </label>
-                </td>
-                <td>
-                    <input class="text" type="text" name="nom_alternatifs" id="nom_alternatifs">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <label>Nom(s) alterniatif(s) actuel : </label>
+                    </td>
+                    <td>
+                        <label>
+                            <?= $donnees['nom_alternatifs'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label data-cy="current-alternative-name" for="nom_alternatifs">Nouveau nom(s) alternatif(s) :
+                        </label>
+                    </td>
+                    <td>
+                        <input data-cy="update-alternative-name" class="text" type="text" name="nom_alternatifs"
+                            id="nom_alternatifs">
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Auteur actuel : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['auteur'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="auteur">Nouvel auteur : </label>
-                </td>
-                <td>
-                    <input class="text" type="text" name="auteur" id="auteur">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <label>Auteur actuel : </label>
+                    </td>
+                    <td>
+                        <label>
+                            <?= $donnees['auteur'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label data-cy="current-author" for="auteur">Nouvel auteur : </label>
+                    </td>
+                    <td>
+                        <input data-cy="update-author" class="text" type="text" name="auteur" id="auteur">
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Artiste(s) actuel : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['artiste'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="artiste">Nouvel artiste(e) : </label>
-                </td>
-                <td>
-                    <input class="text" type="text" name="artiste" id="artiste">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <label>Artiste(s) actuel : </label>
+                    </td>
+                    <td>
+                        <label data-cy="current-artist">
+                            <?= $donnees['artiste'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="artiste">Nouvel artiste(e) : </label>
+                    </td>
+                    <td>
+                        <input data-cy="update-artist" class="text" type="text" name="artiste" id="artiste">
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Status actuel : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['status'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="status">Nouveau status : </label>
-                </td>
-                <td>
-                    <!--<input class="text" type="text" name="status" id="status">-->
-                    <select name="status" id="status">
-                        <?php if ($donnees['status'] == "en cours"){?>
-                            <option> <?php echo $donnees['status']  ?> </option>
+                <tr>
+                    <td>
+                        <label>Status actuel : </label>
+                    </td>
+                    <td>
+                        <label>
+                            <?= $donnees['status'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label data-cy="current-status" for="status">Nouveau status : </label>
+                    </td>
+                    <td>
+                        <!--<input class="text" type="text" name="status" id="status">-->
+                        <select data-cy="update-status" name="status" id="status">
+                            <?php if ($donnees['status'] == "en cours") { ?>
+                            <option>
+                                <?php echo $donnees['status'] ?>
+                            </option>
                             <option>en pause</option>
                             <option>termines</option>
-                        <?php
-                        }
-                        elseif ($donnees['status'] == "en pause"){?>
-                        <option> <?php echo $donnees['status']  ?> </option>
-                        <option>en cours</option>
-                        <option>termines</option>
-                        <?php }
-                        elseif (utf8_encode($donnees['status']) == "en termines"){?>
-                            <option> <?php echo $donnees['status']  ?> </option>
+                            <?php
+                            } elseif ($donnees['status'] == "en pause") { ?>
+                            <option>
+                                <?php echo $donnees['status'] ?>
+                            </option>
+                            <option>en cours</option>
+                            <option>termines</option>
+                            <?php } elseif (utf8_encode($donnees['status']) == "en termines") { ?>
+                            <option>
+                                <?php echo $donnees['status'] ?>
+                            </option>
                             <option>en cours</option>
                             <option>en pause</option>
-                        <?php } ?>
+                            <?php } ?>
 
 
-                    </select>
-                </td>
-            </tr>
+                        </select>
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Année actuelle : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['annee'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="annee">Nouvelle année : </label>
-                </td>
-                <td>
-                    <input class="text" type="number" name="annee" id="annee">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <label>Année actuelle : </label>
+                    </td>
+                    <td>
+                        <label>
+                            <?= $donnees['annee'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label data-cy="current-year" for="annee">Nouvelle année : </label>
+                    </td>
+                    <td>
+                        <input data-cy="update-year" class="text" type="number" name="annee" id="annee">
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Genre(s) actuel : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['genre'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="genre">Nouveau(x) genre : </label>
-                </td>
-                <td>
-                    <input class="text" type="text" name="genre" id="genre">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <label data-cy="current-genre">Genre(s) actuel : </label>
+                    </td>
+                    <td>
+                        <label>
+                            <?= $donnees['genre'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="genre">Nouveau(x) genre : </label>
+                    </td>
+                    <td>
+                        <input data-cy="update-genre" class="text" type="text" name="genre" id="genre">
+                    </td>
+                </tr>
 
-            <tr><td></td></tr>
-            <tr><td></td></tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
 
-            <tr>
-                <td>
-                    <label>Description actuelle : </label>
-                </td>
-                <td>
-                    <label><?= $donnees['description'] ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="description">Nouvelle description : </label>
-                </td>
-                <td>
-                     <textarea name="description" id="description" placeholder="Nouvelle description" cols="25" onKeyDown="textareaSize(this);" onKeyUp="textareaSize(this);"  spellcheck="true" class="text"
-
-                               style="
+                <tr>
+                    <td>
+                        <label>Description actuelle : </label>
+                    </td>
+                    <td>
+                        <label data-cy="current-description">
+                            <?= $donnees['description'] ?>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="description">Nouvelle description : </label>
+                    </td>
+                    <td>
+                        <textarea data-cy="update-description" name="description" id="description"
+                            placeholder="Nouvelle description" cols="25" onKeyDown="textareaSize(this);"
+                            onKeyUp="textareaSize(this);" spellcheck="true" class="text" style="
                                        width: 100%;
                                        background: transparent;
                                        overlay: auto;
@@ -377,15 +423,17 @@ if(isset($erreur)) {
 
 
                                        "></textarea>
-                    <!--<input class="text" type="text" name="description" id="description">-->
-                </td>
-            </tr>
-        </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formmodif" value="Modifier !">
-    </form>
-</div>
+                        <!--<input class="text" type="text" name="description" id="description">-->
+                    </td>
+                </tr>
+            </table>
+            <input data-cy="submit-update" class="input-select formchoice" type="submit" formmethod="post"
+                name="formmodif" value="Modifier !">
+        </form>
+    </div>
 
-<?php require '../complements/footer.php'; ?>
-<script type="text/javascript" src="../js/toogle_theme.js"></script>
+    <?php require '../complements/footer.php'; ?>
+    <script type="text/javascript" src="../js/toogle_theme.js"></script>
 </body>
+
 </html>
