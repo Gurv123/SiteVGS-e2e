@@ -1,6 +1,8 @@
 # Vgs
 
-Le site de la **Team VGS** est un site de lecture de scan.
+Le site **VGS** est un site de lecture de scan manga/webtoon/manhua.
+
+Gurvan Buanic, Fabien Rivet, Florian Chicot, Ewann Roux.
 
 ## Installation
 
@@ -16,6 +18,11 @@ Le site de la **Team VGS** est un site de lecture de scan.
 - Pour lancer le site localement, on utilise la commande : **serve** depuis la **NX Console** ou bien par ligne de commande : `npx nx run sitevgs:serve`
 - Pour lancer les tests e2e, on peut lancer la commande : **e2e** depuis la **NX Console** ou bien par ligne de commande : `npx nx run site-vgs-e2e:e2e`
   -> La commande : **serve-d** sert à la commande : **e2e** pour lancer le site web en détaché.
+
+## Après les tests
+
+- Si l'on veut refaire les tests, il faut re-import la base de données
+- Discard tous les changements dû aux tests.
 
 ## Problème possible lors de l'installation
 
