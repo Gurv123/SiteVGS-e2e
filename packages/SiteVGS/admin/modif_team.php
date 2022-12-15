@@ -5,9 +5,9 @@ require 'nav_admin.php';
 include("../bdd/connection_bdd.php");
 $getname = $_GET['name'];
 
-$mangas = $bdd->prepare('SELECT * FROM team WHERE pseudo = ?');
-$mangas->execute(array($getname));
-$donnees = $mangas->fetch();
+$team = $bdd->prepare('SELECT * FROM team WHERE pseudo = ?');
+$team->execute(array($getname));
+$donnees = $team->fetch();
 
 if (isset($_POST['formmodif'])) {
     $role = $_POST['role'];
@@ -35,13 +35,12 @@ if (isset($_POST['formmodif'])) {
         $modifdescription->execute();
     }
     header('Location: select_team.php');
-
 }
 
 ?>
 <html class="" id="toggle_page">
 <head>
-    <title>Modification de mangas</title>
+    <title>Modification de la team</title>
     <meta charset="UTF-8 sans BOM">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/admin/upload.css">
@@ -61,7 +60,7 @@ if(isset($erreur)) {
 </div>
 
 <div class="form">
-    <form method="POST">
+    <form method="POST" data-cy="modif-team-form">
         <table>
             <tr>
                 <td>
@@ -88,7 +87,7 @@ if(isset($erreur)) {
                     <label for="role">Role(s) : </label>
                 </td>
                 <td>
-                    <input class="text" type="text" name="role" id="role">
+                    <input class="text" type="text" name="role" id="role" data-cy="modif-team-role" >
                 </td>
             </tr>
 
@@ -108,7 +107,7 @@ if(isset($erreur)) {
                     <label for="grade">Nouvel auteur : </label>
                 </td>
                 <td>
-                    <input class="text" type="text" name="grade" id="grade">
+                    <input class="text" type="text" name="grade" id="grade" data-cy="modif-team-grade" >
                 </td>
             </tr>
 
@@ -128,7 +127,7 @@ if(isset($erreur)) {
                     <label for="admin">Choix admin (0 = non, 1 = oui) : </label>
                 </td>
                 <td>
-                    <input class="text" type="text" name="admin" id="admin">
+                    <input class="text" type="text" name="admin" id="admin" data-cy="modif-team-admin">
                 </td>
             </tr>
 
@@ -137,7 +136,7 @@ if(isset($erreur)) {
 
 
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formmodif" value="Modifier !">
+        <input class="input-select formchoice" type="submit" formmethod="post" name="formmodif" value="Modifier !" data-cy="modif-team-submit" >
     </form>
 </div>
 

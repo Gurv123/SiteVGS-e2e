@@ -4,19 +4,14 @@ forcer_utilisateur_connecte();
 require_once '../function/compteur.php';
 
 include("../bdd/connection_bdd.php");
-$print = $bdd->query('SELECT * FROM team WHERE pseudo = "'.$_SESSION["pseudo"].'"' );
+$print = $bdd->query('SELECT * FROM team WHERE pseudo = "' . $_SESSION["pseudo"] . '"');
 $code = $print->fetch();
 $_SESSION['poste'] = $code['Admin'];
 
-if ($_SESSION['poste'] == 1  ){
+if ($_SESSION['poste'] == 1) {
     $input_upload = 'display: ;';
-
-}
-
-else
-{
+} else {
     $input_upload = 'display: none;';
-
 }
 
 /*
@@ -48,6 +43,7 @@ if ($_SESSION['pseudo'] != $authdev['pseudo']) {
 ?>
 
 <html>
+
 <head>
     <link rel="icon" type="image/jpg" href="../img/vgs.png">
     <meta charset="UTF-8">
@@ -55,39 +51,40 @@ if ($_SESSION['pseudo'] != $authdev['pseudo']) {
 </head>
 
 <body>
-<header class="header normal" id="toggle_header">
+    <header class="header normal" id="toggle_header">
 
-    <div id="header">
-        <nav class="a_header" id="toggle_nav">
-            <ul>
-                <li>
-                    <a href="../index.php">Accueil du site</a>
-                </li>
-                <li style="<?php echo $input_upload ?>" >
-                    <a href="dashboard.php" >Dashboard</a>
-                </li>
-                <li style="<?php echo $input_upload ?>" >
-                    <a href="upload.php" >Upload</a>
-                </li>
-                <li style="<?php echo $input_upload ?>" >
-                    <a href="config.php" >Config</a>
-                </li>
-                <li>
-                    <a href="profil.php?name=<?php echo $_SESSION['pseudo']; ?>">Profil</a>
-                </li>
-                <li>
-                    <a href="../deconnexion.php">Deconnexion</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="button_top">
-        <li>
-            <a href="#header"><img class="top-arrow" src="../img/top-arrow.png"></a>
-        </li>
-    </div>
+        <div id="header">
+            <nav class="a_header" id="toggle_nav">
+                <ul data-cy="nav-ul-admin">
+                    <li>
+                        <a href="../index.php">Accueil du site</a>
+                    </li>
+                    <li style="<?php echo $input_upload ?>">
+                        <a href="dashboard.php" data-cy="dashboard">Dashboard</a>
+                    </li>
+                    <li style="<?php echo $input_upload ?>">
+                        <a href="upload.php" data-cy="upload">Upload</a>
+                    </li>
+                    <li style="<?php echo $input_upload ?>">
+                        <a href="config.php" data-cy="config">Config</a>
+                    </li>
+                    <li>
+                        <a href="profil.php?name=<?php echo $_SESSION['pseudo']; ?>" data-cy="profil">Profil</a>
+                    </li>
+                    <li>
+                        <a href="../deconnexion.php" data-cy="logout">Deconnexion</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="button_top">
+            <li>
+                <a href="#header"><img class="top-arrow" src="../img/top-arrow.png"></a>
+            </li>
+        </div>
 
-</header>
+    </header>
 
 </body>
+
 </html>

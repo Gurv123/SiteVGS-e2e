@@ -33,10 +33,11 @@ $uploaddir = '../img/team/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
     if (!empty($_POST['pseudo']) and !empty($_POST['role'])) {
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-            $insertmbr = $bdd->prepare("INSERT INTO team(pseudo, role, grade) VALUES(?, ?, ?)");
-            $insertmbr->execute(array($pseudo, $role, $grade));
+            $insertmbr = $bdd->prepare("INSERT INTO team(pseudo, role, grade, admin) VALUES(?, ?, ?, ?)");
+            $insertmbr->execute(array($pseudo, $role, $grade, 1));
             rename($uploadfile, "../img/team/" . $_POST['pseudo'] . ".jpg");
-            $erreur = "Un nouveau membre vient d'être ajouter à la base de donnée " . print_r($insertmbr);
+            $erreur = "Un nouveau membre vient d'être ajouter à la base de donnée ";
+            header("Location: config.php");
         } else {
             $erreur = "L'image n'est malheureusement pas passée, veuillez recommencer svp";
         }
@@ -61,14 +62,14 @@ if(isset($erreur)) {
 }
 ?>
     <div class="choices form">
-        <form method="post" class="projet" enctype="multipart/form-data">
+        <form method="post" class="projet" enctype="multipart/form-data" data-cy="add-member-form">
             <table>
                 <tr>
                     <td>
                         <label for="fileUpload">Image :</label>
                     </td>
                     <td>
-                        <input class="filup" type="file" name="userfile" id="fileUpload">
+                        <input class="filup" type="file" name="userfile" id="fileUpload" data-cy="add-member-img" >
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +83,7 @@ if(isset($erreur)) {
                         <label for="pseudo">Pseudo :</label>
                     </td>
                     <td>
-                        <input class="text" type="text" name="pseudo" placeholder="Pseudo">
+                        <input class="text" type="text" name="pseudo" placeholder="Pseudo" data-cy="add-member-username">
                     </td>
                 </tr>
                 <tr>
@@ -90,7 +91,7 @@ if(isset($erreur)) {
                         <label for="role">Rôle :</label>
                     </td>
                     <td>
-                        <input class="text" type="text" name="role" placeholder="rôle">
+                        <input class="text" type="text" name="role" placeholder="rôle" data-cy="add-member-role">
                     </td>
                 </tr>
                 <tr>
@@ -104,7 +105,7 @@ if(isset($erreur)) {
                         <label for="grade">Grade :</label>
                     </td>
                     <td>
-                        <input class="text" type="text" name="grade" placeholder="grade">
+                        <input class="text" type="text" name="grade" placeholder="grade" data-cy="add-member-grade">
                     </td>
                 </tr>
                 <tr>
@@ -114,7 +115,7 @@ if(isset($erreur)) {
                     </td>
                 </tr>
             </table>
-            <input class="input-select formchoice" type="submit" formmethod="post" name="formcreate" value="Valider !">
+            <input class="input-select formchoice" type="submit" formmethod="post" name="formcreate" value="Valider !" data-cy="add-member-submit">
         </form>
     </div>
 

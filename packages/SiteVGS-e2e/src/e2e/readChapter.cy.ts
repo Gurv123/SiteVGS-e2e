@@ -1,10 +1,9 @@
-describe('sitevgs', () => {
-  beforeEach(() => cy.visit('http://localhost:8000'));
+export {};
 
-  // it('should display welcome message', () => {
-  //   cy.contains('CONNEXION').click();
-  // });
+const baseUrl = Cypress.config().baseUrl
 
+describe('Read chapter', () => {
+  beforeEach(() => cy.visit(baseUrl));
 
   it('Lecture chapter', () => {
     // Test Already registered link
@@ -14,8 +13,6 @@ describe('sitevgs', () => {
     cy.get('[data-cy="35"]').click()
     cy.url().should('include', '/main.php')
 
-
-
     cy.get('[data-cy="right_Arrow"]').should('be.visible').click()
     cy.get('[data-cy="right_Arrow"]').should('be.visible').click()
     cy.get('[data-cy="right_Arrow"]').should('be.visible').click()
@@ -24,12 +21,7 @@ describe('sitevgs', () => {
     cy.get('[data-cy="right_Arrow"]').should('be.visible').click()
     cy.get('[data-cy="right_Arrow"]').should('be.visible').click()
     cy.get('[data-cy="right_Arrow"]').should('be.visible').click()
-
 
     cy.url().should('include', '/projet.php')
-
-
   })
-
-
 });

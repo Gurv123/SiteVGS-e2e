@@ -1,6 +1,10 @@
+export {};
+
+const baseUrl = Cypress.config().baseUrl
+
 describe('Social Networks', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8000')
+    cy.visit(baseUrl)
   });
 
   // Check Facebook link

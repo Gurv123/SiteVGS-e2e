@@ -3,13 +3,10 @@ require '../function/auth.php';
 forcer_utilisateur_connecte();
 require 'nav_admin.php';
 include("../bdd/connection_bdd.php");
-$mangas = $bdd->query('SELECT * FROM team');
-
+$team = $bdd->query('SELECT * FROM team');
 
 $print = $bdd->query('SELECT * FROM team WHERE pseudo = "'.$_SESSION["pseudo"].'"' );
 $code = $print->fetch();
-
-
 
 if ($_SESSION['poste'] == 1  ){
 
@@ -17,13 +14,12 @@ if ($_SESSION['poste'] == 1  ){
 
 else
 {
-    header('Location: ../index.php');
-
+    header('Location: /');
 }
 
 
 if (isset($_POST['formmodif'])) {
-    $_SESSION['name'] = $_POST['selectmangas'];
+    $_SESSION['name'] = $_POST['selectusername'];
     header("Location: modif_team.php?name=".$_SESSION['name']);
 }
 
@@ -31,7 +27,7 @@ if (isset($_POST['formmodif'])) {
 
 <html class="" id="toggle_page">
 <head>
-    <title>Selection de mangas</title>
+    <title>Selection team</title>
     <meta charset="UTF-8 sans BOM">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/admin/upload.css">
@@ -44,24 +40,24 @@ if(isset($erreur)) {
 }
 ?>
 <div align="center">
-    <h3>Veuillez selectionner le manga que vous voulez modifier</h3>
+    <h3>Veuillez selectionner la personne que vous voulez modifier :</h3>
 </div>
 
 <div class="choices form">
-    <form method="POST">
+    <form method="POST" data-cy="update-member-team-form">
         <table>
-            <?php while ($donnees = $mangas->fetch()): ?>
+            <?php while ($donnees = $team->fetch()): ?>
                 <tr>
                     <td>
-                        <input type="radio" name="selectmangas" id="selectmangas" value="<?= $donnees['pseudo'] ?>">
+                        <input type="radio" name="selectusername" id="selectusername" value="<?= $donnees['pseudo'] ?>" data-cy="update-member-team-radio">
                     </td>
                     <td>
-                        <label for="selectmangas"><?= $donnees['pseudo'] ?></label>
+                        <label for="selectusername" data-cy="update-member-team-username"><?= $donnees['pseudo'] ?></label>
                     </td>
                 </tr>
             <?php endwhile; ?>
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formmodif" value="Modifier !">
+        <input class="input-select formchoice" type="submit" formmethod="post" name="formmodif" value="Modifier !" data-cy="update-member-team-submit" >
     </form>
 </div>
 

@@ -65,10 +65,10 @@ ajouter_vue();
     <header class="header normal" id="toggle_header">
 
         <div id="header_nav">
-            <nav class="a_header" id="toggle_nav">
-                <ul>
+            <nav class="a_header" id="toggle_nav" >
+                <ul data-cy="nav-ul">
                     <li>
-                        <a href="../index.php"  data-cy="home">ACCUEIL</a>
+                        <a href="/"  data-cy="home">ACCUEIL</a>
                     </li>
 
                     <li >
@@ -79,7 +79,7 @@ ajouter_vue();
                         <a href="../team.php" data-cy="team">LA TEAM</a>
                     </li>
                     <li>
-                        <a href="../index.php" data-cy="home-logo"><img src="../img/vgs.png" width="90" height="75"></a>
+                        <a href="/" data-cy="home-logo"><img src="../img/vgs.png" width="90" height="75"></a>
                     </li>
                     <li>
                         <a href="../contact.php" data-cy="contact">CONTACT</a>
