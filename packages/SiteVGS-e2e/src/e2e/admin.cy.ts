@@ -1,3 +1,5 @@
+export {};
+
 const baseUrl = Cypress.config().baseUrl
 
 describe('Admin', () => {

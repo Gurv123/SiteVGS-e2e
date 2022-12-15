@@ -1,6 +1,10 @@
+export {};
+
+const baseUrl = Cypress.config().baseUrl
+
 describe('register', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8000')
+    cy.visit(baseUrl)
     cy.get('[data-cy="register"]').click()
     cy.url().should('include', '/inscription')
   });
