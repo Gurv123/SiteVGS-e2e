@@ -126,68 +126,68 @@ if (isset($_POST['formcreate'])) {
 
 if (isset($_POST['formchap'])) {
 
-    $number = str_replace('.', '-', $_POST['number']);
-    $exist = '../img/scan/' . $_POST['name'] . "/" . $number;
-    $cible = $_POST['name'];
-    $date_update = date('Y-m-d H:i:s');
-    $sortie = $bdd->query('SELECT * FROM mangas WHERE nom = "' . $cible . '"');
-    $nombrechap = $sortie->fetch();
-    if (file_exists($exist)) {
+  $number = str_replace('.', '-', $_POST['number']);
+  $exist = '../img/scan/' . $_POST['name'] . "/" . $number;
+  $cible = $_POST['name'];
+  $date_update = date('Y-m-d H:i:s');
+  $sortie = $bdd->query('SELECT * FROM mangas WHERE nom = "' . $cible . '"');
+  $nombrechap = $sortie->fetch();
+  if (file_exists($exist)) {
 
-        $files = glob($exist . '/*'); // get all file names
-        foreach ($files as $file) { // iterate files
-            if (is_file($file))
-                unlink($file); // delete file
-        }
-        rmdir($exist);
+    $files = glob($exist . '/*'); // get all file names
+    foreach ($files as $file) { // iterate files
+      if (is_file($file))
+        unlink($file); // delete file
     }
-    if (!file_exists('../img/scan/' . $_POST['name'] . "/" . $number . "/")) {
-        mkdir('../img/scan/' . $_POST['name'] . "/" . $number . "/", 0777, true);
+    rmdir($exist);
+  }
+  if (!file_exists('../img/scan/' . $_POST['name'] . "/" . $number . "/")) {
+    mkdir('../img/scan/' . $_POST['name'] . "/" . $number . "/", 0777, true);
+  }
+  if (!empty($number) and !empty($_POST['name'])) {
+    $uploaddir = '../img/scan/' . $_POST['name'] . "/" . $number . "/";
+    $uploadfile = $uploaddir . basename($_FILES['file_zip']['name']);
+    //var_dump($_FILES['file_zip']['name']);
+    move_uploaded_file($_FILES['file_zip']['tmp_name'], $uploaddir . $cible . " - " . $number . ".zip");
+
+    $zip = new ZipArchive();
+
+    $zip->open($uploaddir . $cible . " - " . $number . ".zip", ZipArchive::CREATE);
+    //$zip->open($uploaddir . $cible . " - " . $number . ".zip");
+
+
+    $i = 0;
+    $nameindex = 1;
+    $count = $zip->count();
+    //var_dump($count);
+    while ($count > $i) {
+      $zip->renameIndex($i, $nameindex . '.jpg');
+      $i += 1;
+      $nameindex += 1;
     }
-    if (!empty($number) and !empty($_POST['name'])) {
-        $uploaddir = '../img/scan/' . $_POST['name'] . "/" . $number . "/";
-        $uploadfile = $uploaddir . basename($_FILES['file_zip']['name']);
-        //var_dump($_FILES['file_zip']['name']);
-        move_uploaded_file($_FILES['file_zip']['tmp_name'], $uploaddir . $cible . " - " . $number . ".zip");
 
-        $zip = new ZipArchive();
-
-        $zip->open($uploaddir . $cible . " - " . $number . ".zip", ZipArchive::CREATE);
-        //$zip->open($uploaddir . $cible . " - " . $number . ".zip");
-
-
-        $i = 0;
-        $nameindex = 1;
-        $count = $zip->count();
-        //var_dump($count);
-        while ($count > $i) {
-            $zip->renameIndex($i, $nameindex . '.jpg');
-            $i += 1;
-            $nameindex += 1;
-        }
-
-        $i = 0;
-        $nameindex = 1;
-        while ($count > $i) {
-            $zip->extractTo($uploaddir, $nameindex . '.jpg');
-            $nameindex += 1;
-            $i += 1;
-        }
-        $zip->close();
+    $i = 0;
+    $nameindex = 1;
+    while ($count > $i) {
+      $zip->extractTo($uploaddir, $nameindex . '.jpg');
+      $nameindex += 1;
+      $i += 1;
+    }
+    $zip->close();
 
 
-        /*$insertchap = $bdd->prepare("UPDATE mangas SET nb_chap = '" . $number . "', date_update ='" . $date_update . "'WHERE nom = '" . $cible . "'");
-        $insertchap->execute(array());*/
+    /*$insertchap = $bdd->prepare("UPDATE mangas SET nb_chap = '" . $number . "', date_update ='" . $date_update . "'WHERE nom = '" . $cible . "'");
+    $insertchap->execute(array());*/
 
-        $selectChapBdd = $bdd->prepare("SELECT * from chapitre where projet = ? AND nb_chap = ?");
-        $selectChapBdd->execute([$cible, $number]);
+    $selectChapBdd = $bdd->prepare("SELECT * from chapitre where projet = ? AND nb_chap = ?");
+    $selectChapBdd->execute([$cible, $number]);
 
-        $compteur = $selectChapBdd->rowCount();
+    $compteur = $selectChapBdd->rowCount();
 
-        if ($compteur != 0) {
-            foreach ($selectChapBdd as $row) {
-                $id = $row['id'];
-            }
+    if ($compteur != 0) {
+      foreach ($selectChapBdd as $row) {
+        $id = $row['id'];
+      }
 
 //            $selectChapBdd = $bdd->prepare("SELECT * from chapitre where projet = ? ORDER BY nb_chap ASC ");
 //            $selectChapBdd->execute([$cible]);
@@ -197,38 +197,38 @@ if (isset($_POST['formchap'])) {
 //            }
 
 
-            $erreur = "Je vais sup un chapitre " . $id;
+      $erreur = "Je vais sup un chapitre " . $id;
 
 
-            $delete_chap = $bdd->prepare("DELETE FROM `chapitre` WHERE projet = ? AND nb_chap = ?");
-            $delete_chap->execute(array($cible, $number));
+      $delete_chap = $bdd->prepare("DELETE FROM `chapitre` WHERE projet = ? AND nb_chap = ?");
+      $delete_chap->execute(array($cible, $number));
 
-            $insertchap = $bdd->prepare("INSERT INTO chapitre (projet, nb_chap, data_date) VALUES(?, ?, ?)");
-            $insertchap->execute(array($cible, $number, $date_update));
+      $insertchap = $bdd->prepare("INSERT INTO chapitre (projet, nb_chap, data_date) VALUES(?, ?, ?)");
+      $insertchap->execute(array($cible, $number, $date_update));
 
-            $erreur = "Votre chapitre a bien été modifier ! ";
+      $erreur = "Votre chapitre a bien été modifier ! ";
 
 
-        } else {
+    } else {
 
 //        $insertchap = $bdd->prepare("UPDATE chapites SET nb_chap = ?, date_data =?, projet = ?" );
 //        $insertchap->execute(array($number,$date_update,$cible));
 
 
-            $insertchap = $bdd->prepare("INSERT INTO chapitre (projet, nb_chap, data_date) VALUES(?, ?, ?)");
-            $insertchap->execute(array($cible, $number, $date_update));
+      $insertchap = $bdd->prepare("INSERT INTO chapitre (projet, nb_chap, data_date) VALUES(?, ?, ?)");
+      $insertchap->execute(array($cible, $number, $date_update));
 
-            $erreur = "Votre chapitre a bien été upload ! ";
-        }
-
-        $insertchap = $bdd->prepare("UPDATE mangas SET date_update ='" . $date_update . "'WHERE nom = '" . $cible . "'");
-        $insertchap->execute(array());
-
-    } else {
-        $erreur = "Un des champs n'est pas rempli !";
-        //echo "oui1";
-
+      $erreur = "Votre chapitre a bien été upload ! ";
     }
+
+    $insertchap = $bdd->prepare("UPDATE mangas SET date_update ='" . $date_update . "'WHERE nom = '" . $cible . "'");
+    $insertchap->execute(array());
+
+  } else {
+    $erreur = "Un des champs n'est pas rempli !";
+    //echo "oui1";
+
+  }
 
 }
 
@@ -314,9 +314,9 @@ if (isset($erreur)) {
 ?>
 <form method="POST" class="form_choice">
     <input class="input-select <?= $upload ?>" formmethod="post" value="Upload un Chapitre" type="submit" id="uplaod"
-           name="upload">
+           name="upload" data-cy="upload_chapter">
     <input class="input-select <?= $create ?>" formmethod="post" value="Créer un projet" type="submit" id="create"
-           name="create">
+           name="create" data-cy="create_project">
     <input class="input-select <?= $supp ?>" formmethod="post" value="Supprimer un Chapitre" type="submit" id="supp"
            name="supp">
 
@@ -331,7 +331,7 @@ if (isset($erreur)) {
                     <label for="fileUpload">Image :</label>
                 </td>
                 <td>
-                    <input class="filup" type="file" name="userfile" id="fileUpload">
+                    <input class="filup" type="file" name="userfile" data-cy="img_project" id="fileUpload">
                     <p class="note"><strong>Note : La dimension minimum est de 350x250px</strong></p>
                 </td>
             </tr>
@@ -340,7 +340,7 @@ if (isset($erreur)) {
                     <label for="nom">Nom Complet :</label>
                 </td>
                 <td>
-                    <input class="text" type="text" name="nom" placeholder="Nom complet" id="nom">
+                    <input class="text" type="text" name="nom" placeholder="Nom complet" data-cy="name_project" id="nom">
                 </td>
             </tr>
             <tr>
@@ -348,7 +348,7 @@ if (isset($erreur)) {
                     <label for="other_name">Noms alternatifs :</label>
                 </td>
                 <td>
-                    <input type="text" class="text" id="nom_alternatifs" name="nom_alternatifs"
+                    <input type="text" class="text" id="nom_alternatifs" data-cy="name_project_alternative" name="nom_alternatifs"
                            placeholder="Nom(s) Alternatif(s)">
                 </td>
             </tr>
@@ -357,7 +357,7 @@ if (isset($erreur)) {
                     <label for="auteur">Auteur(s) :</label>
                 </td>
                 <td>
-                    <input class="text" id="auteur" name="auteur" type="text" placeholder="Auteur(s)">
+                    <input class="text" id="auteur" name="auteur" type="text" data-cy="Auteur" placeholder="Auteur(s)">
                 </td>
             </tr>
             <tr>
@@ -365,7 +365,7 @@ if (isset($erreur)) {
                     <label for="artiste">Artiste(s) :</label>
                 </td>
                 <td>
-                    <input class="text" id="artiste" name="artiste" type="text" placeholder="Artiste(s)">
+                    <input class="text" id="artiste" name="artiste" type="text" data-cy="Artiste" placeholder="Artiste(s)">
                 </td>
             </tr>
             <tr>
@@ -373,7 +373,7 @@ if (isset($erreur)) {
                     <label for="status">Status :</label>
                 </td>
                 <td>
-                    <input class="text" type="text" id="status" name="status" placeholder="status">
+                    <input class="text" type="text" id="status" name="status" data-cy="Status" placeholder="status">
                 </td>
             </tr>
             <tr>
@@ -381,7 +381,7 @@ if (isset($erreur)) {
                     <label for="annee">Année :</label>
                 </td>
                 <td>
-                    <input class="text" type="number" formmethod="post" name="annee" placeholder="Année" id="annee">
+                    <input class="text" type="number" formmethod="post" name="annee" data-cy="Annee" placeholder="Année" id="annee">
                 </td>
             </tr>
             <tr>
@@ -389,7 +389,7 @@ if (isset($erreur)) {
                     <label for="genre">Genre :</label>
                 </td>
                 <td>
-                    <input class="text genre" formmethod="post" name="genre" placeholder="genre(s) : Action, Ecchi,..."
+                    <input class="text genre" formmethod="post" name="genre" data-cy="genre" placeholder="genre(s) : Action, Ecchi,..."
                            id="genre">
                 </td>
             </tr>
@@ -398,12 +398,12 @@ if (isset($erreur)) {
                     <label for="description">Description :</label>
                 </td>
                 <td>
-                    <input class="text" formmethod="post" id="description" name="description" type="text"
+                    <input class="text" formmethod="post" id="description" data-cy="description" name="description" type="text"
                            placeholder="description">
                 </td>
             </tr>
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formcreate" value="Valider !">
+        <input class="input-select formchoice" type="submit" formmethod="post" data-cy="Create_project" name="formcreate" value="Valider !">
     </form>
 </div>
 
@@ -417,7 +417,7 @@ if (isset($erreur)) {
 
             <label for="name">Choisissez le projet :</label>
 
-            <input list="Projet" class="text" name="name" id="name"/>
+            <input list="Projet" class="text" name="name" id="name" data-cy="name_project_manga"/>
 
             <datalist id="Projet">
                 <?php
@@ -438,7 +438,7 @@ if (isset($erreur)) {
                 </td>
                 <td>
 
-                    <input class="filup" type="file" accept="application/zip" name="file_zip" id="file_zip">
+                    <input class="filup" type="file" accept="application/zip" name="file_zip" data-cy="file_zip" id="file_zip">
 
                 </td>
             </tr>
@@ -447,11 +447,11 @@ if (isset($erreur)) {
                     <label for="number">numéro du chapitre :</label>
                 </td>
                 <td>
-                    <input type="number" class="text" name="number" id="number" step="0.1">
+                    <input type="number" class="text" name="number" data-cy="number_chapter" id="number" step="0.1">
                 </td>
             </tr>
         </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formchap" value="Valider !">
+        <input class="input-select formchoice" type="submit" formmethod="post" data-cy="create_chapter" name="formchap" value="Valider !">
     </form>
 </div>
 

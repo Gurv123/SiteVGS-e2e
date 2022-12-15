@@ -8,17 +8,14 @@ $mangas = $bdd->query('SELECT nom FROM mangas');
 
 
 
-$print = $bdd->query('SELECT * FROM team WHERE pseudo = "'.$_SESSION["pseudo"].'"' );
+$print = $bdd->query('SELECT * FROM team WHERE pseudo = "' . $_SESSION["pseudo"] . '"');
 $code = $print->fetch();
 
 
 
-if ($_SESSION['poste'] == 1  ){
+if ($_SESSION['poste'] == 1) {
 
-}
-
-else
-{
+} else {
     header('Location: ../index.php');
 
 }
@@ -36,6 +33,7 @@ if (isset($_POST['formdelete'])) {
 }
 ?>
 <html class="" id="toggle_page">
+
 <head>
     <title>Suppression de mangas</title>
     <meta charset="UTF-8 sans BOM">
@@ -44,34 +42,39 @@ if (isset($_POST['formdelete'])) {
 </head>
 
 <body>
-<?php
-if(isset($erreur)) {
-    echo '<font color="red">'.$erreur."</font>";
-}
-?>
-<div align="center">
-    <h3>Veuillez selectionner les mangas que vous voulez supprimer de la base de donnée</h3>
-</div>
+    <?php
+    if (isset($erreur)) {
+        echo '<font color="red">' . $erreur . "</font>";
+    }
+    ?>
+    <div align="center">
+        <h3>Veuillez selectionner les mangas que vous voulez supprimer de la base de donnée</h3>
+    </div>
 
-<div class="choices form">
-    <form method="POST">
-        <table>
-            <?php while ($donnees = $mangas->fetch()): ?>
+    <div class="choices form">
+        <form method="POST">
+            <table>
+                <?php while ($donnees = $mangas->fetch()): ?>
                 <tr>
                     <td>
-                        <input type="checkbox" name="delmangas[]" id="delmangas" value="<?= $donnees['nom'] ?>">
+                        <input type="checkbox" name="delmangas[]" id="delmangas" value="<?= $donnees['nom'] ?>"
+                            data-cy="<?= $donnees['nom'] ?>">
                     </td>
                     <td>
-                        <label for="delmangas"><?= $donnees['nom'] ?></label>
+                        <label for="delmangas">
+                            <?= $donnees['nom'] ?>
+                        </label>
                     </td>
                 </tr>
-            <?php endwhile; ?>
-        </table>
-        <input class="input-select formchoice" type="submit" formmethod="post" name="formdelete" value="Supprimer !">
-    </form>
-</div>
+                <?php endwhile; ?>
+            </table>
+            <input data-cy="submit-delete-mangas" class="input-select formchoice" type="submit" formmethod="post"
+                name="formdelete" value="Supprimer !">
+        </form>
+    </div>
 
-<?php require '../complements/footer.php'; ?>
-<script type="text/javascript" src="../js/toogle_theme.js"></script>
+    <?php require '../complements/footer.php'; ?>
+    <script type="text/javascript" src="../js/toogle_theme.js"></script>
 </body>
+
 </html>
