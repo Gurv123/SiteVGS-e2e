@@ -80,7 +80,7 @@ $termine = $bdd->query('SELECT * FROM mangas WHERE status Like("termines")');
     <div class="group">
         <?php while ($donnees = $cours->fetch()): ?>
             <div class="solo">
-                <a href="projet.php?name=<?= $donnees['nom'] ?>">
+                <a href="projet.php?name=<?= $donnees['nom'] ?>" data-cy="<?= str_replace(' ','_',$donnees['nom']) ?>">
                     <img class="image_solo" src="img/mangas/<?= $donnees['nom'] ?>.jpg">
                     <p class="name"><?= $donnees['nom'] ?></p>
                 </a>
@@ -94,7 +94,7 @@ $termine = $bdd->query('SELECT * FROM mangas WHERE status Like("termines")');
     <div class="group">
         <?php while ($donnees = $pause->fetch()): ?>
             <div class="solo">
-                <a href="projet.php?name=<?= $donnees['nom'] ?>">
+                <a href="projet.php?name=<?= $donnees['nom'] ?>" data-cy="<?= str_replace(' ','_',$donnees['nom']) ?>">
                     <img class="image_solo" src="img/mangas/<?= $donnees['nom'] ?>.jpg">
                     <p class="name"><?= $donnees['nom'] ?></p>
                 </a>
@@ -108,7 +108,7 @@ $termine = $bdd->query('SELECT * FROM mangas WHERE status Like("termines")');
     <div class="group">
         <?php while ($donnees = $termine->fetch()): ?>
             <div class="solo">
-                <a href="projet.php?name=<?= $donnees['nom'] ?>">
+                <a href="projet.php?name=<?= $donnees['nom'] ?>" data-cy="<?= str_replace(' ','_',$donnees['nom']) ?>">
                     <img class="image_solo" src="img/mangas/<?= $donnees['nom'] ?>.jpg">
                     <p class="name"><?= $donnees['nom'] ?></p>
                 </a>
