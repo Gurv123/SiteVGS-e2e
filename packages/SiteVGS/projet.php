@@ -103,7 +103,7 @@ if (isset($_POST['valider'])) {
 while ($donnees = $sortie->fetch()):
     if ($_GET['name'] == $donnees['nom']) {
         ?>
-        <h1 class="title_pres"><?= $donnees['nom'] ?></h1>
+        <h1 class="title_pres" data-cy="current-manga-h1"><?= $donnees['nom'] ?></h1>
         <div class="pres">
             <div class="image_pres">
                 <img class="image_solo" src="img/mangas/<?= $donnees['nom'] ?>.jpg">
@@ -150,7 +150,7 @@ while ($donnees = $sortie->fetch()):
             <div style="margin: 0 auto;
      width: 50%;
 ">
-            <textarea name="Com" id="Com" placeholder="Votre commentaire..." cols="25" onKeyDown="textareaSize(this);"
+            <textarea  data-cy="projet-comment-textarea" name="Com" id="Com" placeholder="Votre commentaire..." cols="25" onKeyDown="textareaSize(this);"
                       onKeyUp="textareaSize(this);" spellcheck="true" class="text" onclick=""
 
                       style="
@@ -173,7 +173,7 @@ while ($donnees = $sortie->fetch()):
                               "></textarea>
                 <hr style="margin: 0px
 <?php echo $pasvuspaspris; ?>">
-                <input class="input-select formchoice" style="line-height: 10px;
+                <input data-cy="projet-comment-submit"  class="input-select formchoice" style="line-height: 10px;
 
 <?php echo $pasvuspaspris; ?>" type="submit" formmethod="post" name="valider" value="Commentez !">
 
@@ -253,7 +253,7 @@ while ($donnees = $sortie->fetch()):
 
                     ?>
 
-                    <div>
+                    <div class="comment-post" data-cy="projet-comment-instance" >
 
                         <?php
                         if ($existe) {
@@ -302,7 +302,7 @@ while ($donnees = $sortie->fetch()):
 " disabled><?= $commenta['commentaires'] ?></textarea></div>
                     </div>
 
-                    <a class="input-select formchoice"
+                    <a class="input-select formchoice"  data-cy="projet-delete-comment-instance"
                        style="
                                border: 1px red;
                                border-style: solid;
