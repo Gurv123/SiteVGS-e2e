@@ -135,7 +135,7 @@ while ($donnees = $sortie->fetch()):
             //echo $fichier;
             $fichier = $row['nb_chap']
             ?>
-            <a href="main.php?name=<?= $donnees['nom'] ?>&chap=<?= str_replace('.', '-', $fichier) ?>">Chapitre <?= str_replace('-', '.', $fichier) ?></a> <?php
+            <a href="main.php?name=<?= $donnees['nom'] ?>&chap=<?= str_replace('.', '-', $fichier) ?>" data-cy="<?= str_replace('.', '-', $fichier) ?>">Chapitre <?= str_replace('-', '.', $fichier) ?></a> <?php
         }
     }
 
