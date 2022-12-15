@@ -22,7 +22,7 @@ describe('register', () => {
 
     // Test if the registration passed with login
     cy.get('[data-cy="login-username"]').should('exist').type('userTest')
-    cy.get('[data-cy="login-password"]').should('exist').type('motdepasse')
+    cy.get('[data-cy="login-password"]').should('exist').type('testtest')
     cy.get('[data-cy="login-submit"]').should('exist').click()
     cy.url().should('include', '/index')
     cy.get('[data-cy="logout"]').should('exist')
