@@ -65,45 +65,45 @@ ajouter_vue();
     <header class="header normal" id="toggle_header">
 
         <div id="header_nav">
-            <nav class="a_header" id="toggle_nav">
-                <ul>
+            <nav class="a_header" id="toggle_nav" >
+                <ul data-cy="nav-ul">
                     <li>
-                        <a href="../index.php">ACCUEIL</a>
+                        <a href="/"  data-cy="home">ACCUEIL</a>
                     </li>
 
                     <li >
-                        <a href="../mangas.php">MANGAS</a>
+                        <a href="../mangas.php"  data-cy="mangas">MANGAS</a>
                     </li>
 
                     <li>
-                        <a href="../team.php">LA TEAM</a>
+                        <a href="../team.php" data-cy="team">LA TEAM</a>
                     </li>
                     <li>
-                        <a href="../index.php"><img src="../img/vgs.png" width="90" height="75"></a>
+                        <a href="/" data-cy="home-logo"><img src="../img/vgs.png" width="90" height="75"></a>
                     </li>
                     <li>
-                        <a href="../contact.php">CONTACT</a>
+                        <a href="../contact.php" data-cy="contact">CONTACT</a>
                     </li>
                     <?php if(!est_connecte()): ?>
                         <li>
-                            <a href="../inscription.php">INSCRIPTION</a>
+                            <a href="../inscription.php" data-cy="register">INSCRIPTION</a>
                         </li>
                     <?php endif; ?>
                     <?php if(!est_connecte()): ?>
                     <li>
-                        <a href="../vgs-connect.php">CONNEXION</a>
+                        <a href="../vgs-connect.php" data-cy="login">CONNEXION</a>
                     </li>
                     <?php endif; ?>
 
 
                     <?php if(est_connecte() ): ?>
                         <li>
-                            <a href="../admin/profil.php?name=<?php echo $_SESSION['pseudo']; ?>">PARAMÈTRE</a>
+                            <a href="../admin/profil.php?name=<?php echo $_SESSION['pseudo']; ?>" data-cy="settings" >PARAMÈTRE</a>
                         </li>
                     <?php endif; ?>
                     <?php if(est_connecte()): ?>
                         <li>
-                            <a href="../deconnexion.php">DÉCONNEXION</a>
+                            <a href="../deconnexion.php" data-cy="logout">DÉCONNEXION</a>
                         </li>
                     <?php endif; ?>
                 </ul>

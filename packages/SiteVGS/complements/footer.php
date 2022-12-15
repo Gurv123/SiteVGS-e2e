@@ -25,11 +25,11 @@ $time = $time_end - $time_start;
             </p>
 
             <div>
-                <a href="https://discord.gg/DvvSNdN" Target="_BLANK"><div id="discord_footer"></div></a>
-                <a href="https://twitter.com/VolpGang" Target="_BLANK"><div id="twitter_footer"></div></a>
-                <a href="https://www.facebook.com/VGSTeams" Target="_BLANK"><div id="facebook_footer"></div></a>
-                <a href="https://www.youtube.com/channel/UCMnKgOVkuoBamqcvZjGko7Q" Target="_BLANK"><div id="youtube_footer"></div></a>
-                <a href="https://www.twitch.tv/volpgangscantrad" Target="_BLANK"><div id="twitch_footer"></div></a>
+                <a href="https://discord.gg/DvvSNdN" data-cy="discord"><div id="discord_footer" ></div></a>
+                <a href="https://twitter.com/VolpGang" data-cy="twitter"><div id="twitter_footer" ></div></a>
+                <a href="https://www.facebook.com/VGSTeams" data-cy="facebook"><div id="facebook_footer" ></div></a>
+                <a href="https://www.youtube.com/channel/UCMnKgOVkuoBamqcvZjGko7Q" data-cy="youtube"><div id="youtube_footer"></div></a>
+                <a href="https://www.twitch.tv/volpgangscantrad" data-cy="twitch"><div id="twitch_footer"></div></a>
             </div>
 
             <div>
