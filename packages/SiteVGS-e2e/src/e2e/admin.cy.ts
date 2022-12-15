@@ -66,6 +66,16 @@ describe('Admin', () => {
     cy.get('[data-cy="pseudo-member-team"]').contains('userTest').should('not.exist')
   })
 
+  it('Delete Member', () => {
+    // Delete Member and check it
+    cy.get('[data-cy="delete-members"]').should('exist').click()
+    cy.url().should('include', '/admin/delete_member.php')
+    cy.get('[data-cy="delete-member"]').check('userTest')
+    cy.get('[data-cy="delete-member-submit"]').should('exist').click()
+    cy.get('[data-cy="delete-members"]').click()
+    cy.get('[data-cy="pseudo-member"]').contains('userTest').should('not.exist')
+  })
+
   it('delete Mangas', () => {
     // Delete Mangas and check it
     cy.get('[data-cy="delete-mangas"]').should('exist').click()
@@ -78,15 +88,6 @@ describe('Admin', () => {
     cy.get('[data-cy="Five Senses"]').should('not.exist')
   })
 
-  it('Delete Member', () => {
-    // Delete Member and check it
-    cy.get('[data-cy="delete-members"]').should('exist').click()
-    cy.url().should('include', '/admin/delete_member.php')
-    cy.get('[data-cy="delete-member"]').check('userTest')
-    cy.get('[data-cy="delete-member-submit"]').should('exist').click()
-    cy.get('[data-cy="delete-members"]').click()
-    cy.get('[data-cy="pseudo-member"]').contains('userTest').should('not.exist')
-  })
 
   it('Add Chapter', () => {
     cy.get('[data-cy="upload"]').should('exist').click()
